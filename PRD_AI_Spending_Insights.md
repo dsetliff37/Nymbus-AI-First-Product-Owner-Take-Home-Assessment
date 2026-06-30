@@ -1,7 +1,7 @@
 ﻿# PRD: AI-Powered Spending Insights (Voice/Text Query Feature)
 
 **Status:** Draft  
-**PM Owner:** [Your name / TBD]  
+**PM Owner:** [David Setliff]  
 **Last Updated:** 2026-06-29  
 **Target Release:** MVP Demo — 1 week | Production Compliance Review — Phase 2 (TBD)  
 **Stakeholders:** Nymbus product leadership, Compliance & Legal, Engineering, Product Design
