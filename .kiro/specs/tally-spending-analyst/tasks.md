@@ -8,22 +8,22 @@ Implementation proceeds in six phases: project scaffolding → data layer (sampl
 
 ## Tasks
 
-- [ ] 1. Scaffold project structure and shared types
+- [x] 1. Scaffold project structure and shared types
   - [x] 1.1 Initialize Next.js app with TypeScript and install dependencies
     - Install: `recharts`, `papaparse`, `fast-check`, `jest-axe`, `@testing-library/react`, `@testing-library/jest-dom`, `axios` (or native fetch).
     - Configure Jest with TypeScript (`ts-jest`) and `jest-axe` setup file.
     - _Requirements: 1.1, 2.1, 4.1, 5.1_
-  - [ ] 1.2 Create shared TypeScript types
+  - [x] 1.2 Create shared TypeScript types
     - Create `src/types/index.ts` defining: `Transaction`, `ParsedIntent`, `IntentType`, `DateRange`, `CalculationResult`, `CompareValues`, `CsvUploadResult`, `CsvError`, `IntentResult`, `IntentError`.
     - _Requirements: 4.1, 5.1, 5.2, 5.3, 5.4, 5.5_
 
 
-- [ ] 2. Implement `DatasetProvider` and sample dataset
-  - [ ] 2.1 Create the static sample dataset
+- [x] 2. Implement `DatasetProvider` and sample dataset
+  - [x] 2.1 Create the static sample dataset
     - Write `src/data/sampleTransactions.ts` containing 200–400 `Transaction` rows spanning ≥ 90 days across ≥ 6 categories (Groceries, Dining Out, Transport, Entertainment, Utilities, Shopping).
     - _Requirements: 1.1, 1.2_
 
-  - [ ] 2.2 Implement `DatasetProvider` context
+  - [x] 2.2 Implement `DatasetProvider` context
     - Create `src/context/DatasetProvider.tsx` with `transactions`, `categories` (memoized distinct sorted names), `loadSampleDataset()`, and `uploadCsv(file)` from the `DatasetContextValue` interface.
     - Load sample dataset on mount via `useEffect`.
     - Ensure no transaction data is written to `localStorage`, `sessionStorage`, or any server-side store.
@@ -39,22 +39,22 @@ Implementation proceeds in six phases: project scaffolding → data layer (sampl
     - Otherwise return `{ ok: true, rowsLoaded, rowsSkipped }`.
     - _Requirements: 1.3, 1.5, 1.6_
 
-  - [ ] 3.2 Write property test — Property 1: CSV parse round-trip preserves valid rows
+  - [~] 3.2 Write property test — Property 1: CSV parse round-trip preserves valid rows
     - **Property 1: CSV parse round-trip preserves valid rows**
     - **Validates: Requirements 1.3, 1.6**
     - Use fast-check to generate arbitrary arrays of valid rows; assert loaded count equals input count and field values match.
 
-  - [ ] 3.3 Write property test — Property 2: Invalid-amount rows are always skipped
+  - [~] 3.3 Write property test — Property 2: Invalid-amount rows are always skipped
     - **Property 2: Invalid-amount rows are always skipped**
     - **Validates: Requirements 1.6**
     - Use fast-check to generate CSV files with a random subset of rows containing non-numeric amounts; assert those rows are excluded and loaded count equals valid-amount row count.
 
-  - [ ] 3.4 Write property test — Property 3: Missing required columns reject the file
+  - [~] 3.4 Write property test — Property 3: Missing required columns reject the file
     - **Property 3: Missing required columns reject the file**
     - **Validates: Requirements 1.5**
     - Use fast-check to generate CSV files missing one or more required columns; assert `missing_columns` error is returned identifying all absent columns and the previously active dataset is retained.
 
-  - [ ] 3.5 Write unit tests for CSV parser
+  - [~] 3.5 Write unit tests for CSV parser
     - Valid file loads all rows.
     - All-rows-invalid returns `no_valid_rows` error.
     - Partial-skip emits correct `rowsSkipped` count with warning.
@@ -63,11 +63,11 @@ Implementation proceeds in six phases: project scaffolding → data layer (sampl
     - _Requirements: 1.3, 1.5, 1.6_
 
 
-- [ ] 4. Checkpoint — ensure data layer tests pass
+- [~] 4. Checkpoint — ensure data layer tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 5. Implement `intentService` (LLM query parser)
-  - [ ] 5.1 Write `src/services/intentService.ts`
+  - [~] 5.1 Write `src/services/intentService.ts`
     - Implement `interpretQuery(queryText, availableCategories)` returning `IntentResult`.
     - Build the LLM prompt using only `queryText` and the list of category names — no amounts, descriptions, or dates.
     - Set a 5-second timeout; return `{ ok: false, error: { type: 'api_timeout' } }` on timeout.
@@ -77,17 +77,17 @@ Implementation proceeds in six phases: project scaffolding → data layer (sampl
     - Resolve relative timeframes (e.g., "last month") against `Date.now()` in the user's local timezone.
     - _Requirements: 4.1, 4.2, 4.5, 4.6, 4.7, 4.8, 4.9_
 
-  - [ ] 5.2 Implement category mismatch detection in `intentService`
+  - [~] 5.2 Implement category mismatch detection in `intentService`
     - After parsing a valid `ParsedIntent`, check each returned category name against the active dataset's category list (case-insensitive).
     - If one or more category names do not match, surface them to the page for the clarification prompt (Requirement 4.10).
     - _Requirements: 4.10, 8.1, 8.3_
 
-  - [ ] 5.3 Write property test — Property 12: Privacy — no amounts/descriptions/dates in LLM payload
+  - [~] 5.3 Write property test — Property 12: Privacy — no amounts/descriptions/dates in LLM payload
     - **Property 12: Privacy — no amounts/descriptions/dates in LLM payload**
     - **Validates: Requirements 4.2, 9.1**
     - Use fast-check to generate arbitrary `Transaction[]` and query strings; spy on the LLM call; assert the captured payload contains only `queryText` and category names — no amount, description, or date values.
 
-  - [ ] 5.4 Write unit tests for `intentService`
+  - [~] 5.4 Write unit tests for `intentService`
     - Correctly rejects responses missing `intent_type`, `categories`, or `timeframe`.
     - Correctly handles `null` fields (maps to `unresolvable_fields`).
     - Rejects unknown `intent_type` strings.
