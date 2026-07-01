@@ -55,3 +55,16 @@ export interface DatasetContextValue {
   loadSampleDataset: () => void;
   uploadCsv: (file: File) => Promise<CsvUploadResult>;
 }
+
+// ── Intent Service ─────────────────────────────────────────────────────────────
+
+export type IntentError =
+  | { type: 'api_timeout' }
+  | { type: 'api_failure'; statusCode?: number }
+  | { type: 'missing_fields'; missingFields: string[] }
+  | { type: 'unsupported_intent_type'; received: string }
+  | { type: 'unresolvable_fields'; fields: string[] };
+
+export type IntentResult =
+  | { ok: true; intent: ParsedIntent }
+  | { ok: false; error: IntentError };
