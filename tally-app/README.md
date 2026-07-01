@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tally – AI Spending Analyst
 
-## Getting Started
+Tally is a natural-language spending analyst that lets you ask plain-English questions about your transaction data — by voice or text. It parses your question into a structured intent using an LLM, performs all financial calculations deterministically from local data, and returns an auditable answer with a supporting chart and the source transactions that produced it.
 
-First, run the development server:
+## Prerequisites
+
+- Node.js 18+
+- npm
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Copy the environment example file and add your OpenAI API key:
+
+```bash
+cp .env.local.example .env.local
+```
+
+Then open `.env.local` and replace `sk-your-key-here` with your actual OpenAI API key. You can get one at [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys).
+
+3. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Run tests:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm test
+```
 
-## Learn More
+## Architecture
 
-To learn more about Next.js, take a look at the following resources:
+Tally's core architecture separates concerns into three layers:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Layer | Responsibility |
+|-------|---------------|
+| **UI Layer** | React components for input (text + voice), answer display (summary, chart, source list), and TTS playback controls |
+| **Intent Layer** | Calls the LLM API with only the query text and available category names; returns a structured `ParsedIntent` object |
+| **Calculation Layer** | A fully deterministic, synchronous module that filters and aggregates the in-memory transaction dataset using only the structured intent |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The LLM is used solely as a query parser — all arithmetic and aggregation is performed by the deterministic Calculation Engine.
 
-## Deploy on Vercel
+## Key Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Natural-language queries** — ask spending questions in plain English (e.g., "How much did I spend on groceries last month?")
+- **Voice input** — speak your question using the browser's Web Speech API
+- **Text-to-speech answers** — hear the answer read aloud after a voice query
+- **Four calculation types** — sum, compare, average, and count
+- **Visual charts** — bar charts for comparisons, donut charts for single-category results
+- **Source transactions** — see exactly which transactions produced the answer
+- **CSV upload** — bring your own transaction data (up to 10 MB)
+- **Built-in sample dataset** — start exploring immediately with 90+ days of sample transactions across 6 categories
+- **Clarification flow** — Tally asks follow-up questions if it can't understand your query
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Privacy
+
+Tally is designed with privacy in mind:
+
+- **No data is persisted** — transaction data, query history, and answers exist only in browser memory for the current session
+- **Minimal LLM exposure** — only category names are sent to the LLM API for intent parsing; no transaction amounts, descriptions, or dates ever leave the browser
+- **No analytics tracking** of query text or financial data

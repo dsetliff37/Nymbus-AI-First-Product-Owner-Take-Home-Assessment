@@ -95,8 +95,8 @@ Implementation proceeds in six phases: project scaffolding → data layer (sampl
     - _Requirements: 4.6, 4.7, 4.8_
 
 
-- [ ] 6. Implement the Calculation Engine
-  - [ ] 6.1 Write `src/lib/calculationEngine.ts`
+- [x] 6. Implement the Calculation Engine
+  - [x] 6.1 Write `src/lib/calculationEngine.ts`
     - Implement `calculate(intent, transactions)` returning `CalculationResult`.
     - Filter transactions by category (case-insensitive) and date range (inclusive).
     - Handle `sum`, `compare`, `average`, `count` intent types.
@@ -105,7 +105,7 @@ Implementation proceeds in six phases: project scaffolding → data layer (sampl
     - Set `zeroMatch: true` when no rows match.
     - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 6.4, 6.5_
 
-  - [~] 6.2 Write property tests for Calculation Engine
+  - [x] 6.2 Write property tests for Calculation Engine
     - Property 5: sum correctness
     - Property 6: average correctness
     - Property 7: compare correctness
@@ -115,7 +115,7 @@ Implementation proceeds in six phases: project scaffolding → data layer (sampl
     - Property 14: category match is case-insensitive
     - _Requirements: 5.1–5.8, 6.4, 6.5_
 
-  - [~] 6.3 Write unit tests for Calculation Engine
+  - [x] 6.3 Write unit tests for Calculation Engine
     - Sum of matching transactions.
     - Average of matching transactions.
     - Compare two categories returns sumA, sumB, difference.
@@ -125,8 +125,8 @@ Implementation proceeds in six phases: project scaffolding → data layer (sampl
     - Sorting: most-recent first, alpha tiebreaker.
     - _Requirements: 5.1–5.8_
 
-- [ ] 7. Build UI components
-  - [~] 7.1 Build `QueryInput` component and `useSpeechInput` hook
+- [x] 7. Build UI components
+  - [x] 7.1 Build `QueryInput` component and `useSpeechInput` hook
     - Create `src/components/QueryInput.tsx` with text input (max 500 chars) and mic button.
     - Create `src/hooks/useSpeechInput.ts` wrapping Web Speech API.
     - Silence detection: 1500 ms timer; no-speech timeout: 10 s.
@@ -134,31 +134,31 @@ Implementation proceeds in six phases: project scaffolding → data layer (sampl
     - ARIA labels on mic and submit buttons; Tab/Enter keyboard support.
     - _Requirements: 2.1–2.6, 3.1–3.8, 11.2, 11.3, 11.5, 11.6_
 
-  - [~] 7.2 Build `useTts` hook and `TtsControls` component
+  - [x] 7.2 Build `useTts` hook and `TtsControls` component
     - Create `src/hooks/useTts.ts` wrapping `window.SpeechSynthesis`.
     - Create `src/components/TtsControls.tsx` with audio indicator and replay button.
     - Auto-play on voice query answers; manual replay for text queries.
     - Degrade silently if TTS unsupported.
     - _Requirements: 7.1–7.8, 11.3, 11.5_
 
-  - [~] 7.3 Build answer display components
+  - [x] 7.3 Build answer display components
     - Create `src/components/SummaryText.tsx` — plain-English answer sentence.
     - Create `src/components/ChartPanel.tsx` — bar chart for `compare`, donut for others using Recharts; ARIA description.
     - Create `src/components/SourceTransactionList.tsx` — up to 100 rows, sorted.
     - Create `src/components/InterpretedQueryBadge.tsx` — shows what Tally calculated.
     - _Requirements: 6.1–6.8, 11.4_
 
-  - [~] 7.4 Build `ClarificationPanel` component
+  - [x] 7.4 Build `ClarificationPanel` component
     - Create `src/components/ClarificationPanel.tsx` showing unresolved fields and available categories.
     - Support up to 2 clarification rounds; show terminal error on round 2 failure.
     - _Requirements: 8.1–8.5_
 
-  - [~] 7.5 Build `DatasetUpload` component
+  - [x] 7.5 Build `DatasetUpload` component
     - Create `src/components/DatasetUpload.tsx` with file picker, privacy notice, and upload status messages.
     - _Requirements: 1.3–1.7, 9.5_
 
-- [ ] 8. Wire everything together on the main page
-  - [~] 8.1 Implement page-level state and query flow in `app/page.tsx`
+- [x] 8. Wire everything together on the main page
+  - [x] 8.1 Implement page-level state and query flow in `app/page.tsx`
     - Use page reducer for `queryState` (idle/submitting/clarifying/answered/error).
     - On submit: validate query → call `interpretQuery` → detect category mismatches → call `calculate` → display answer.
     - Clear previous answer on new query submission.
@@ -166,17 +166,17 @@ Implementation proceeds in six phases: project scaffolding → data layer (sampl
     - Auto-play TTS for voice queries.
     - _Requirements: 2.2–2.5, 4.3, 4.4, 6.7, 8.1–8.5_
 
-  - [~] 8.2 Integration: end-to-end query flow test
+  - [x] 8.2 Integration: end-to-end query flow test
     - Write an integration test (mocked LLM) covering: text query → ParsedIntent → calculate → display answer.
     - _Requirements: 2.1, 4.1, 5.1, 6.1_
 
-- [ ] 9. Final polish and accessibility
-  - [~] 9.1 Accessibility audit with jest-axe
+- [x] 9. Final polish and accessibility
+  - [x] 9.1 Accessibility audit with jest-axe
     - Run `jest-axe` on all major page states (idle, loading, answered, error, clarification).
     - Fix any violations.
     - _Requirements: 11.1–11.6_
 
-  - [~] 9.2 Add `.env.local.example` and README instructions
+  - [x] 9.2 Add `.env.local.example` and README instructions
     - Document `NEXT_PUBLIC_OPENAI_API_KEY` setup.
     - Add `npm run dev` instructions to README.
     - _Requirements: (developer experience)_
