@@ -4,6 +4,7 @@ A natural-language spending analyst embedded in a mobile banking experience. Use
 
 Built for the Nymbus AI-First Product Owner Take-Home Assessment.
 
+The whole project begain with brainstorming some ideas with chatgpt. Once an idea was chosen the PRD was pulled from private github repo. The PRD was worked with Claude. refinements were made as the testing continued.
 
 
 **Live Demo:** *(clone and run locally — see setup below)*
