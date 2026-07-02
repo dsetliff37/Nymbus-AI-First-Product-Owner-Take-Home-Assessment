@@ -2,7 +2,9 @@
 
 A natural-language spending analyst embedded in a mobile banking experience. Users ask plain-English questions about their spending — by voice or text — and get clear answers with charts, breakdowns, and source transactions.
 
-**Built for the Nymbus AI-First Product Owner Take-Home Assessment.**
+Built for the Nymbus AI-First Product Owner Take-Home Assessment.
+
+
 
 **Live Demo:** *(clone and run locally — see setup below)*
 
@@ -118,14 +120,13 @@ Three layers with strict boundaries:
 
 ## What I'd Change With More Time
 
-1. **Live bank integration** — Plaid or Open Banking for real transaction data with OAuth and consent flows
-2. **Server-side LLM proxy** — Move the API key server-side (Next.js API route) to protect it in production
-3. **Proactive insights** — Push notifications: "You've spent 40% more on dining this month vs. last"
-4. **Budget goals** — "Alert me if I spend more than $500 on dining this month"
-5. **Multi-turn memory** — Full conversation history for complex follow-up chains
-6. **Mobile-native** — React Native for better voice UX and push notifications
-7. **Edge deployment** — Vercel edge functions for LLM proxy with sub-100ms cold starts
-8. **Production observability** — Latency monitoring, error rates, anonymous usage analytics
+1. Live bank integration with Auth and consent flows
+2. Server-side LLM proxy move the API key server-side 
+3. Push notifications: "You've spent 40% more on dining this month vs. last"
+4. Budget goals "Alert me if I spend more than $500 on dining this month"
+5. Full conversation history for complex follow-ups 
+6. React Native for better voice UX and push notifications
+7. Production metrics Latency monitoring, error rates, anonymous usage analytics
 
 ---
 
