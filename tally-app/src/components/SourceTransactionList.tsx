@@ -21,39 +21,31 @@ export default function SourceTransactionList({ transactions }: SourceTransactio
   }
 
   return (
-    <div className="mt-4 overflow-x-auto">
-      <table className="w-full text-sm text-left border-collapse">
-        <thead>
-          <tr className="border-b border-gray-200 bg-gray-50">
-            <th className="px-4 py-2 font-semibold text-gray-700">Date</th>
-            <th className="px-4 py-2 font-semibold text-gray-700">Description</th>
-            <th className="px-4 py-2 font-semibold text-gray-700">Category</th>
-            <th className="px-4 py-2 font-semibold text-gray-700 text-right">Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          {displayRows.map((tx, index) => (
-            <tr
-              key={`${tx.date}-${tx.description}-${index}`}
-              className="border-b border-gray-100 hover:bg-gray-50"
+    <div className="overflow-x-auto">
+      <p className="text-xs font-medium uppercase tracking-wider text-[#6c5ce7] mb-3">Transactions</p>
+      <div className="space-y-2 max-h-64 overflow-y-auto">
+        {displayRows.map((tx, index) => (
+          <div
+            key={`${tx.date}-${tx.description}-${index}`}
+            className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0"
+          >
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-gray-800 truncate">{tx.description}</p>
+              <p className="text-xs text-gray-400">{formatDate(tx.date)} • {tx.category}</p>
+            </div>
+            <span
+              className={`text-sm font-semibold ml-3 whitespace-nowrap ${
+                tx.amount < 0 ? 'text-emerald-500' : 'text-gray-800'
+              }`}
             >
-              <td className="px-4 py-2 text-gray-600 whitespace-nowrap">{formatDate(tx.date)}</td>
-              <td className="px-4 py-2 text-gray-900">{tx.description}</td>
-              <td className="px-4 py-2 text-gray-600">{tx.category}</td>
-              <td
-                className={`px-4 py-2 text-right whitespace-nowrap font-mono ${
-                  tx.amount < 0 ? 'text-red-600' : 'text-gray-900'
-                }`}
-              >
-                {formatAmount(tx.amount)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              {formatAmount(tx.amount)}
+            </span>
+          </div>
+        ))}
+      </div>
       {transactions.length > 100 && (
-        <p className="mt-2 text-sm text-gray-500">
-          Showing 100 of {transactions.length} transactions.
+        <p className="mt-2 text-xs text-gray-400 text-center">
+          Showing 100 of {transactions.length} transactions
         </p>
       )}
     </div>

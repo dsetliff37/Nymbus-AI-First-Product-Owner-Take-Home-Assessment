@@ -20,11 +20,16 @@ export interface UseTtsReturn {
  * - Stores the last spoken text for replay.
  */
 export function useTts(): UseTtsReturn {
-  const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
+  const [supported, setSupported] = useState(false);
 
   const [state, setState] = useState<TtsState>('idle');
   const lastTextRef = useRef<string | null>(null);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+
+  // Detect support after mount to avoid hydration mismatch
+  useEffect(() => {
+    setSupported('speechSynthesis' in window);
+  }, []);
 
   // Cleanup on unmount: cancel any active speech
   useEffect(() => {

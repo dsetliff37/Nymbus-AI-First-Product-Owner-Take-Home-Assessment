@@ -45,10 +45,15 @@ function createSpeechRecognition(): SpeechRecognition | null {
 }
 
 export function useSpeechInput(): UseSpeechInputReturn {
-  const [supported] = useState<boolean>(() => isSpeechRecognitionSupported());
+  const [supported, setSupported] = useState(false);
   const [state, setState] = useState<SpeechInputState>('idle');
   const [transcript, setTranscript] = useState<string>('');
   const [error, setError] = useState<SpeechInputError | null>(null);
+
+  // Detect support after mount to avoid hydration mismatch
+  useEffect(() => {
+    setSupported(isSpeechRecognitionSupported());
+  }, []);
 
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const silenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);

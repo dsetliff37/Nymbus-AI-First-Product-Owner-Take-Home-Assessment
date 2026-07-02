@@ -90,20 +90,19 @@ export function DatasetUpload() {
   return (
     <section
       aria-label="Dataset upload"
-      className="w-full rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-700 dark:bg-zinc-900"
+      className="w-full"
     >
-      {/* Privacy notice — always visible (Requirement 9.5) */}
-      <p className="mb-4 text-sm text-zinc-500 dark:text-zinc-400">
+      {/* Privacy notice */}
+      <p className="mb-3 text-xs text-gray-400">
         <span aria-hidden="true" className="mr-1">🔒</span>
-        Your data is used only within this session and is never transmitted or
-        stored.
+        Your data stays in this session — never transmitted or stored.
       </p>
 
       {/* File input */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <label
           htmlFor="csv-upload"
-          className="inline-flex cursor-pointer items-center gap-2 rounded-md bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-200 focus-within:ring-2 focus-within:ring-blue-500 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
+          className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-[#6c5ce7] to-[#a29bfe] px-4 py-2.5 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-[#6c5ce7]/25 focus-within:ring-2 focus-within:ring-[#6c5ce7]"
         >
           <span aria-hidden="true">📄</span>
           {isUploading ? 'Uploading…' : 'Upload CSV'}
@@ -122,7 +121,7 @@ export function DatasetUpload() {
         <button
           type="button"
           onClick={handleReset}
-          className="inline-flex items-center gap-1 rounded-md border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          className="inline-flex items-center gap-1 rounded-xl border border-[#6c5ce7]/20 px-4 py-2.5 text-sm font-medium text-[#6c5ce7] transition-all hover:bg-[#6c5ce7]/5 focus:outline-none focus:ring-2 focus:ring-[#6c5ce7]"
         >
           Reset to sample data
         </button>
@@ -132,11 +131,11 @@ export function DatasetUpload() {
       {status.kind === 'success' && (
         <p
           role="status"
-          className="mt-3 text-sm text-green-700 dark:text-green-400"
+          className="mt-3 text-sm text-emerald-600"
         >
           ✓ Loaded {status.rowsLoaded} row{status.rowsLoaded !== 1 ? 's' : ''}
           {status.rowsSkipped > 0 && (
-            <span className="text-amber-600 dark:text-amber-400">
+            <span className="text-amber-500">
               {' '}
               • {status.rowsSkipped} row
               {status.rowsSkipped !== 1 ? 's' : ''} skipped
@@ -148,7 +147,7 @@ export function DatasetUpload() {
       {status.kind === 'error' && (
         <p
           role="alert"
-          className="mt-3 text-sm text-red-700 dark:text-red-400"
+          className="mt-3 text-sm text-red-500"
         >
           {status.message}
         </p>
@@ -157,7 +156,7 @@ export function DatasetUpload() {
       {/* Current dataset status */}
       <p
         id="privacy-notice"
-        className="mt-4 text-xs text-zinc-400 dark:text-zinc-500"
+        className="mt-3 text-xs text-gray-400"
       >
         {transactions.length} transaction{transactions.length !== 1 ? 's' : ''}{' '}
         loaded • {categories.length} categor

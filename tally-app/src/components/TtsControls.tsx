@@ -62,14 +62,14 @@ export function TtsControls({
   const replayEnabled = state === 'played' || state === 'error';
 
   return (
-    <div className="flex items-center gap-2" role="group" aria-label="Audio playback controls">
+    <div className="flex items-center gap-3" role="group" aria-label="Audio playback controls">
       {/* Audio indicator */}
       {showIndicator && (
         <span
-          className={`inline-flex items-center gap-1 text-sm ${
+          className={`inline-flex items-center gap-1.5 text-sm ${
             state === 'playing'
-              ? 'text-blue-600 animate-pulse'
-              : 'text-gray-500'
+              ? 'text-[#6c5ce7] animate-pulse'
+              : 'text-gray-400'
           }`}
           aria-live="polite"
           aria-atomic="true"
@@ -102,10 +102,10 @@ export function TtsControls({
         onClick={() => replay()}
         disabled={!replayEnabled}
         aria-label="Replay answer"
-        className={`inline-flex items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+        className={`inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium transition-all focus:outline-none focus:ring-2 focus:ring-[#6c5ce7] focus:ring-offset-2 ${
           replayEnabled
-            ? 'bg-blue-100 text-blue-700 hover:bg-blue-200 cursor-pointer'
-            : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+            ? 'bg-[#6c5ce7]/10 text-[#6c5ce7] hover:bg-[#6c5ce7]/20 cursor-pointer'
+            : 'bg-gray-100 text-gray-300 cursor-not-allowed'
         }`}
       >
         {/* Replay icon */}

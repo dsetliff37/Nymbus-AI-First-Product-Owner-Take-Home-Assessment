@@ -123,9 +123,9 @@ export function QueryInput({ onSubmit, isLoading, disabled = false }: QueryInput
             aria-label="Query input"
             aria-invalid={!!validationError}
             aria-describedby={validationError ? 'query-validation-error' : undefined}
-            className={`w-full rounded-lg border px-4 py-3 text-sm outline-none transition-colors
-              ${validationError ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'}
-              ${disabled || isLoading ? 'bg-gray-100 cursor-not-allowed' : 'bg-white'}
+            className={`w-full rounded-xl border px-4 py-3.5 text-sm text-gray-900 outline-none transition-all placeholder:text-gray-400
+              ${validationError ? 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-100' : 'border-gray-200 focus:border-[#6c5ce7] focus:ring-2 focus:ring-[#6c5ce7]/10'}
+              ${disabled || isLoading ? 'bg-gray-50 cursor-not-allowed' : 'bg-gray-50/50'}
             `}
           />
         </div>
@@ -136,8 +136,8 @@ export function QueryInput({ onSubmit, isLoading, disabled = false }: QueryInput
             onClick={handleMicClick}
             disabled={disabled || isLoading}
             aria-label="Start voice input"
-            className={`relative flex h-10 w-10 items-center justify-center rounded-full transition-colors
-              ${isRecording ? 'bg-red-100 text-red-600 hover:bg-red-200' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}
+            className={`relative flex h-11 w-11 items-center justify-center rounded-full transition-all
+              ${isRecording ? 'bg-red-100 text-red-500 shadow-lg shadow-red-100' : 'bg-[#6c5ce7]/10 text-[#6c5ce7] hover:bg-[#6c5ce7]/20'}
               ${disabled || isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
             `}
           >
@@ -163,8 +163,8 @@ export function QueryInput({ onSubmit, isLoading, disabled = false }: QueryInput
           type="submit"
           disabled={disabled || isLoading}
           aria-label="Submit query"
-          className={`flex h-10 items-center justify-center rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition-colors
-            ${disabled || isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700 cursor-pointer'}
+          className={`flex h-11 items-center justify-center rounded-xl px-5 text-sm font-semibold text-white transition-all
+            ${disabled || isLoading ? 'opacity-50 cursor-not-allowed bg-[#6c5ce7]' : 'bg-gradient-to-r from-[#6c5ce7] to-[#a29bfe] hover:shadow-lg hover:shadow-[#6c5ce7]/25 cursor-pointer'}
           `}
         >
           {isLoading ? (
